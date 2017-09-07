@@ -31,6 +31,7 @@ const probes = [ reqPerHour, reqPerMin, reqPerSec ];
 
 const { findTheThings, getAllTitleFields } = require('../elastic');
 const cors = require('./middleware/cors');
+const httpsRedirect = require('./middleware/httpsRedirect');
 const { error, info, log } = require('../utils');
 
 const PORT = process.env.PORT || 7000;
@@ -42,6 +43,7 @@ let typeAheadTitles = [];
 app.use(helmet());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(httpsRedirect);
 
 app.set('views', __dirname +'/views');
 app.set('view engine', 'pug');
